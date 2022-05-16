@@ -34,29 +34,7 @@ public class SolrElastic {
         SolrMethods methodss = new SolrMethods();
         //ESMethods eSMethods = new ESMethods();
         
-  
-        
-//        Timer.start();
         methodss.generalQuery("App:Food AND Sentiment:Positive", "id, App", "id asc");
-//        eSMethods.queryEigth();
-//        eSMethods.print();
-//        Timer.stop();
 
-//        PostgreSQLConnection connection = new PostgreSQLConnection();
-//        connection.connect();
-//        connection.indexingPostgreSQLData();
-//        ByPostgreSQL bpsql = new ByPostgreSQL();
-//        bpsql.indexingPostgreSQLData();
-        /*Çalışma süresi hesaplanmak istenen kod Timer.start() ve Timer.stop() 
-        arasına yazılmaktadır.*/
-        //for (int i = 0; i < 10; i++) {
-//            Timer.start();
-//            methods.querySeven();
-//            methods.print();
-//            Timer.stop();
-
-        //System.out.println("Sorgu çalisirken geçen süre: " + Timer.getElapsedMilliseconds());
-        //}      
-    }
 
 }
