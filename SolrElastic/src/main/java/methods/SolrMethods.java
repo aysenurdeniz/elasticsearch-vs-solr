@@ -37,7 +37,7 @@ public class SolrMethods {
     public SolrMethods() {
     }
 
-    public void generalQuery(String query, String fl, String sort) {
+    public void generalQuery(String indexName, String query, String fl, String sort) {
         final QueryResponse response;
         final Map<String, String> queryParamMap = new HashMap<>();
         queryParamMap.put("q", query);
@@ -46,14 +46,22 @@ public class SolrMethods {
         MapSolrParams queryParams = new MapSolrParams(queryParamMap);
         try {
             timer.Timer.start();
-            response = client.query("reviews", queryParams);
-            final SolrDocumentList documents = response.getResults();
-            System.out.println("Found " + documents.getNumFound() + " documents");
-            for (SolrDocument document : documents) {
-                String app = (String) document.getFirstValue("App");
-                String sentiment = (String) document.getFieldValue("Sentiment");
-                System.out.println(app + "," + sentiment);
-            }
+            response = client.query(indexName, queryParams);
+            System.out.println("Found " + response.getResults().getNumFound() + " documents");
+            System.out.println(response.getResults());
+//            final SolrDocumentList documents = response.getResults();
+//            for (SolrDocument document : documents) {
+//                System.out.println(document.toString());
+//            }
+//            if (documents.size() > 10) {
+//                for (int i = 0; i < 10; i++) {
+//                    System.out.println(documents.get(i));
+//                }
+//            } else {
+//                for (int i = 0; i < documents.size(); i++) {
+//                    System.out.println(documents.get(i));
+//                }
+//            }
             timer.Timer.stop();
             System.out.println("----------------------\nGeçen Süre:" + timer.Timer.getElapsedMilliseconds());
         } catch (SolrServerException | IOException ex) {
