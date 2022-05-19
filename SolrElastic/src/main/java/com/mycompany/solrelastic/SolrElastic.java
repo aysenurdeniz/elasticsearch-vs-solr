@@ -29,12 +29,13 @@ public class SolrElastic {
      */
     public static void main(String[] args) throws IOException, SolrServerException, ClassNotFoundException, InterruptedException {
 
- //      String query1 = "Sentiment_Polarity:0.5*";
-        //QueryMethods sınıfındaki metotları çağırmak için oluşturulan methods nesnesi
         SolrMethods methodss = new SolrMethods();
-        //ESMethods eSMethods = new ESMethods();
-        
-        methodss.generalQuery("App:Food AND Sentiment:Positive", "id, App", "id asc");
+        ESMethods eSMethods = new ESMethods();
 
+        eSMethods.generalQuery("reviews", "Translated_Review", "nan");
+        System.out.println("++++++++++++++++++++++++++++++++++");
+        methodss.generalQuery("reviews","Translated_Review:nan", "id, App,Translated_Reviews, Sentiment, Sentiment_Polarity, Sentiment_Subjectivity", "id desc");
+
+    }
 
 }
