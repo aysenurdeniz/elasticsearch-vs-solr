@@ -5,34 +5,19 @@
  */
 package methods;
 
-import co.elastic.clients.elasticsearch.ElasticsearchClient;
-import co.elastic.clients.elasticsearch.core.IndexRequest;
-import co.elastic.clients.elasticsearch.core.IndexResponse;
-import co.elastic.clients.json.jackson.JacksonJsonpMapper;
-import co.elastic.clients.transport.ElasticsearchTransport;
-import co.elastic.clients.transport.rest_client.RestClientTransport;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.http.HttpHost;
-//import org.elasticsearch.action.ActionFuture;
-//import org.elasticsearch.action.ActionListener;
-//import org.elasticsearch.action.ActionRequest;
-//import org.elasticsearch.action.ActionResponse;
-//import org.elasticsearch.action.ActionType;
-//import org.elasticsearch.action.search.SearchRequest;
-//import org.elasticsearch.action.search.SearchResponse;
-//import org.elasticsearch.action.search.SearchType;
-//import org.elasticsearch.client.ElasticsearchClient;
+import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
-//import org.elasticsearch.client.RestClient;
-//import org.elasticsearch.client.RestHighLevelClient;
-//import org.elasticsearch.index.query.QueryBuilders;
-//import org.elasticsearch.search.SearchHits;
-//import org.elasticsearch.search.aggregations.AggregationBuilders;
-//import org.elasticsearch.search.builder.SearchSourceBuilder;
-//import org.elasticsearch.search.sort.SortOrder;
-//import org.elasticsearch.threadpool.ThreadPool;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.search.sort.SortOrder;
 
 /**
  * Elasticsearch sorgularının bulunduğu sınıf
@@ -41,42 +26,41 @@ import org.elasticsearch.client.RestClient;
  */
 public class ESMethods {
 
-    // Create the low-level client
-    RestClient restClient = RestClient.builder(new HttpHost("localhost", 9300)).build();
+    RestHighLevelClient client = new RestHighLevelClient(
+            RestClient.builder(
+                    new HttpHost("localhost", 9200, "http"),
+                    new HttpHost("localhost", 9201, "http")));
 
-    // Create the transport with a Jackson mapper
-    ElasticsearchTransport transport = new RestClientTransport(restClient, new JacksonJsonpMapper());
-
-    // And create the API client
-    ElasticsearchClient client = new ElasticsearchClient(transport);
-
-    
     public ESMethods() {
-        
+
     }
 
-    public void generalQuery() {
-        Map<String, Object> jsonMap = new HashMap<>();
-        jsonMap.put("user", "kimchy");
-        jsonMap.put("postDate", "");
-        jsonMap.put("message", "trying out Elasticsearch");
-        IndexRequest indexRequest = new IndexRequest("posts").id("1").source(jsonMap);
-        IndexResponse indexResponse = client.index(indexRequest, RequestOptions.DEFAULT);
+    /**
+     *
+     * @param indexName
+     * @param fields
+     * @param values
+     */
+    public void generalQuery(String indexName, String fields, String values) {
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+        sourceBuilder.query(QueryBuilders.matchQuery(fields, values));
+        sourceBuilder.trackTotalHits(true);
+
+        SearchRequest searchRequest = new SearchRequest();
+        searchRequest.indices(indexName);
+        searchRequest.source(sourceBuilder);
+
+        try {
+            timer.Timer.start();
+            SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
+            System.out.println("Found " + response.getHits().getTotalHits());
+            System.out.println(response.getHits());
+            timer.Timer.stop();
+            System.out.println("----------------------\nGeçen Süre:" + timer.Timer.getElapsedMilliseconds());
+            client.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ESMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-//    private static synchronized RestHighLevelClient makeConnection() {
-//
-//        if (restHighLevelClient == null) {
-//            restHighLevelClient = new RestHighLevelClient(
-//                    RestClient.builder(
-//                            new HttpHost(HOST, PORT, SCHEME)));
-//        }
-//
-//        return restHighLevelClient;
-//    }
-//
-//    private static synchronized void closeConnection() throws IOException {
-//        restHighLevelClient.close();
-//        restHighLevelClient = null;
-//    }
 }
