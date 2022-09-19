@@ -13,8 +13,10 @@ Dönüştürme işlemi için CSV-to-NewJSON.py kullanılmaktadır.
 {"App":"10 Best Foods for You", "Translated_Review":"nan", "Sentiment":"nan", "Sentiment_Polarity":"nan", "Sentiment_Subjectivity":"nan"}
 ```
 
-Üç tane veri seti bulunmaktadır:
+---
 
-1- papers-data.zip > papers-data.txt
-2- reviews-data.zip > reviews-data.txt
-3- wos-data.txt
+Üç veri seti için converter işlemi uygulanmıştır:
+
+1) papers-data.zip > papers-data.txt
+2) reviews-data.zip > reviews-data.txt
+3) wos-data.txt
