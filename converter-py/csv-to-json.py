@@ -88,6 +88,29 @@ with open("wos-papers.json", 'w', encoding='utf-8') as f:
     jsonFile = json.dumps(data, indent=4)
     f.write(jsonFile)
 
+    
+# ------------------customers_reviews--------------------------
+
+with open("C:\\Users\\mehdi\\OneDrive\\Masaüstü\\dataset\\archive\\Reviews.csv", "r", encoding='utf-8') as f:
+    reader = csv.reader(f)
+    next(reader)
+    data = []
+    for row in reader:
+        data.append({"Id": row[0].replace('"', "'"),
+                     "ProductId": row[1].replace('"', "'"),
+                     "UserId": row[2].replace('"', "'"),
+                     "ProfileName": row[3].replace('"', "'"),
+                     "HelpfulnessNumerator": row[4].replace('"', "'"),
+                     "HelpfulnessDenominator": row[5].replace('"', "'"),
+                     "Score": row[6].replace('"', "'"),
+                     "Time": row[7].replace('"', "'"),
+                     "Summary": row[8].replace('"', "'"),
+                     "Text": row[9].replace('"', "'")})
+
+with open("customers_reviews.json", 'w', encoding='utf-8') as f:
+    jsonFile = json.dumps(data, indent=4)
+    f.write(jsonFile)
+    
 
 #
 # with open("C:\\Users\\anurd\\Desktop\\dataset\\wos-engineering.csv", "r") as f:
