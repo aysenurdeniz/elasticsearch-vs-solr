@@ -112,6 +112,25 @@ with open("customers_reviews.json", 'w', encoding='utf-8') as f:
     f.write(jsonFile)
     
 
+with open("C:\\Users\\mehdi\\OneDrive\\Masaüstü\\dataset\\player\\archive\\teamfights_players.csv", "r") as f:
+    reader = csv.reader(f)
+    next(reader)
+    data = []
+    for row in reader:
+        data.append({"match_id": row[0].replace('"', "'"),
+                     "player_slot": row[1].replace('"', "'"),
+                     "buybacks": row[2].replace('"', "'"),
+                     "damage": row[3].replace('"', "'"),
+                     "deaths": row[4].replace('"', "'"),
+                     "gold_delta": row[5].replace('"', "'"),
+                     "xp_end": row[6].replace('"', "'"),
+                     "xp_start": row[7].replace('"', "'")})
+
+with open("wos_papers.json", 'w', encoding='utf-8') as f:
+    jsonFile = json.dumps(data, indent=4)
+    f.write(jsonFile)
+    
+    
 #
 # with open("C:\\Users\\anurd\\Desktop\\dataset\\wos-engineering.csv", "r") as f:
 #     reader = csv.reader(f)
