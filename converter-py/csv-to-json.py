@@ -126,7 +126,7 @@ with open("C:\\Users\\mehdi\\OneDrive\\Masaüstü\\dataset\\player\\archive\\tea
                      "xp_end": row[6].replace('"', "'"),
                      "xp_start": row[7].replace('"', "'")})
 
-with open("wos_papers.json", 'w', encoding='utf-8') as f:
+with open("teamfights_players.json", 'w', encoding='utf-8') as f:
     jsonFile = json.dumps(data, indent=4)
     f.write(jsonFile)
     
