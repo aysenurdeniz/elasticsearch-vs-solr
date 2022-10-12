@@ -21,6 +21,27 @@ indexes = ["apps_reviews", "wos_papers", "teamfights_players"]
 
 sizes = [26863, 26866, 6, 6, 294, 3955, 14926, 237, 26089, 55263]
 
+# def Searching_Solr(index_name, query, size):
+#     solr_client = pysolr.Solr('http://localhost:8983/solr/' + index_name + '/')
+#     print("Solr Results:")
+#     for i in range(5):
+#         timer.start_time()
+#         response = solr_client.search(query, **{'rows': size})
+#         searching_time = timer.finish_time();
+#         print(searching_time)
+#         # print(len(response))
+# 
+# 
+# def Searching_Elastic(index_name, query, size):
+#     es_client = Elasticsearch('http://localhost:9200/')
+#     print("Elasticsearch Results:")
+#     for i in range(5):
+#         timer.start_time()
+#         response = es_client.search(index=index_name, size=size, track_total_hits=True,
+#                                                                   query={"query_string": {"query": query}})
+#         searching_time = timer.finish_time();
+#         print(searching_time)
+#         # print(response['hits']['total']['value'])
 
 def Searching_Solr(index_name, query, size):
     timer.start_time()
@@ -39,7 +60,7 @@ def Searching_Elastic(index_name, query, size):
     # print(response['hits']['total']['value'])
 
 
-# for i in range(5):
+
 print("-----------1---------------")
 Searching_Solr(indexes[0], queries[0], sizes[0])
 Searching_Elastic(indexes[0], queries[0], sizes[0])
