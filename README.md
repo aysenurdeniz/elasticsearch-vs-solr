@@ -3,8 +3,10 @@
 Below are datasets that used in this project:
 | Dataset | Volume |
 | ----------- | ----------- |
-| Papers Info - [Web of Science Dataset](https://data.mendeley.com/datasets/9rw3vkcfy4/6) | 70 MB / 46985 |
-| [Web of Science Dataset (Engineering, Computing & Technology Journals)](https://data.mendeley.com/datasets/syzcbykjw3) | 4 MB / 1655 |
+| teamfights_players.csv - [Dota 2 Matches](https://www.kaggle.com/datasets/devinanzelmo/dota-2-matches) | ~300 MB / 1500000 |
+| X.txt - [Web of Science Dataset](https://data.mendeley.com/datasets/9rw3vkcfy4/6) | ~70 MB / 46985 |
+| googleplaystore_user_reviews.csv - [Google Play Store Apps](https://www.kaggle.com/lava18/google-play-store-apps) | ~17 MB / 64295 |
+
 
 # Query Codes
 
