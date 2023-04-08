@@ -7,9 +7,9 @@ Below are datasets that used in this project:
 | X.txt - [Web of Science Dataset](https://data.mendeley.com/datasets/9rw3vkcfy4/6) | ~70 MB / 46985 |
 | googleplaystore_user_reviews.csv - [Google Play Store Apps](https://www.kaggle.com/lava18/google-play-store-apps) | ~17 MB / 64295 |
 
-## Paper Link:
+## Paper:
 
-Will be added
+Ayşenur Deniz, Muhammed Mehdi Elömer and Ahmet Arif Aydin, ["A comparison of Apache Solr and Elasticsearch technologies in support of large-scale data analysis"](https://dergipark.org.tr/en/pub/gumusfenbil/article/1213317) Gümüşhane Üniversitesi Fen Bilimleri Dergisi, 2023, doi: 10.17714/gumusfenbil.1213317
 
 ## Descriptions
 
